@@ -1,7 +1,5 @@
 import requests
 from bs4 import BeautifulSoup
-import csv
-from petshop.link_pagination import get_pagination
 
 def get_link(url):
     link = []
@@ -44,16 +42,4 @@ def get_product(url_from_link, i_in_range4):
     except: return None
 
 
-#print(get_link(url))
-
-
-#for i in get_link(url):
-#   for l in range(4):
-#        p = get_product(i,l)
-#        if p == None:
- #           pass
- #       else:
-#            with open('products.csv', 'a', newline='') as csvfile:
-#                writer = csv.writer(csvfile, dialect='excel', delimiter=',')
-#                writer.writerow(['', p['title'], p['description'], p['weight'], p['price'], '', p['image']])
 
