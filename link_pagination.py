@@ -1,6 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
 
+"""Функция get_pagination возвращает массив линков пагинации, принимает 
+аргумент url адрес на список продуктов, и массив link"""
+
 def get_pagination(url, link):
     r = requests.get(url)
     soup = BeautifulSoup(r.text, 'html.parser')

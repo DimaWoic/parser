@@ -1,6 +1,11 @@
 import requests
 from bs4 import BeautifulSoup
 
+
+"""Функция get_link принимает аргумент адреса на страницу со списком продуктов
+возвращает массив ссылок на продукты"""
+
+
 def get_link(url):
     link = []
     page = requests.get(url)
@@ -13,8 +18,10 @@ def get_link(url):
         link.append('https://www.petshop.ru' + a)
     return link
 
+"""Функция get_product принимает два аргумента: ссылку на страницу
+продукта и индекс от итерации for i in range(4) возвращает словарь с 'title', 'weight', 'price', 'description', 'image'"""
 
-def get_product(url_from_link, i_in_range4):
+def get_product(url_from_link, i_in_range4, brand):
     r = requests.get(url_from_link)
     soup = BeautifulSoup(r.text, 'html.parser')
     title_product = soup.find('h1', class_='product-name j_product_name').text
@@ -31,15 +38,15 @@ def get_product(url_from_link, i_in_range4):
         image_src = image_link.findAll('a')  # массив ссылок
         img_href = 'https:' + image_src[0].find('img').get('src')  # получаем ссылку
     # создаём словарь и добавляем результаты парсинга
-        page_out = dict.fromkeys(['title', 'weight', 'price', 'description', 'image'])
+        page_out = dict.fromkeys(['title', 'weight', 'price','brand', 'description', 'image'])
         page_out['title'] = title_product
         page_out['weight'] = weight
         page_out['price'] = price
+        page_out['brand'] = brand
         page_out['description'] = description
         page_out['image'] = img_href
         print(title_product, weight)
         return page_out
     except: return None
-
 
 
